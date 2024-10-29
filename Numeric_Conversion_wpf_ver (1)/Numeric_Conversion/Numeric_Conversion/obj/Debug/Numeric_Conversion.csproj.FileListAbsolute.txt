@@ -1,0 +1,10 @@
+C:\Users\admin\source\repos\Numeric_Conversion\Numeric_Conversion\bin\Debug\Numeric_Conversion.exe.config
+C:\Users\admin\source\repos\Numeric_Conversion\Numeric_Conversion\bin\Debug\Numeric_Conversion.exe
+C:\Users\admin\source\repos\Numeric_Conversion\Numeric_Conversion\bin\Debug\Numeric_Conversion.pdb
+C:\Users\admin\source\repos\Numeric_Conversion\Numeric_Conversion\obj\Debug\Numeric_Conversion.csproj.AssemblyReference.cache
+C:\Users\admin\source\repos\Numeric_Conversion\Numeric_Conversion\obj\Debug\Numeric_Conversion.Properties.Resources.resources
+C:\Users\admin\source\repos\Numeric_Conversion\Numeric_Conversion\obj\Debug\Numeric_Conversion.csproj.GenerateResource.cache
+C:\Users\admin\source\repos\Numeric_Conversion\Numeric_Conversion\obj\Debug\Numeric_Conversion.csproj.CoreCompileInputs.cache
+C:\Users\admin\source\repos\Numeric_Conversion\Numeric_Conversion\obj\Debug\Numeric_Conversion.exe
+C:\Users\admin\source\repos\Numeric_Conversion\Numeric_Conversion\obj\Debug\Numeric_Conversion.pdb
+C:\Users\admin\source\repos\Numeric_Conversion\Numeric_Conversion\obj\Debug\Numeric_Conversion.Numberic_Conversion.resources

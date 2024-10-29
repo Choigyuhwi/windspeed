@@ -1,0 +1,92 @@
+﻿<Window x:Class="WindPowerGeneratorMonitoringSystem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WindPowerGeneratorMonitoringSystem"
+        mc:Ignorable="d"
+        Title="WindPowerGeneratorMonitoringSystem" Height="600" Width="500" MinWidth="500" MinHeight="600" MaxWidth="500" MaxHeight="600" ResizeMode="NoResize">
+    <Grid Margin="0,10,0,10" HorizontalAlignment="Center" Width="480">
+        <Label Content="풍력발전기 모니터링 시스템" FontWeight="Bold" FontSize="20"/>
+        <Button Width="30" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,10,10" Name="Button_setting" Command="{Binding SettingCommand}" Background="#00DDDDDD" BorderBrush="#00707070" >
+            <Button.Content>
+                <Image Source="Resources/sett.png" Height="auto" Width="auto" OpacityMask="Black">
+                </Image>
+            </Button.Content>
+        </Button>
+        <GroupBox Margin="10,39,10,411" BorderBrush="#FFB5B5B5" Header="Port" FontSize="15" Foreground="#FFB5B5B5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="75*"/>
+                    <ColumnDefinition Width="141*"/>
+                    <ColumnDefinition Width="110"/>
+                    <ColumnDefinition Width="110"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0" Content="PORT 1 :" VerticalAlignment="Center" Height="30"/>
+                <ComboBox Grid.Row="0" Name="ComboBox_Port1" Grid.Column="1" Height="30" ItemsSource="{Binding PortList1}" SelectedItem="{Binding SelectPort1}"/>
+                <Button Grid.Row="0" Grid.Column="2" Content="OPEN" Name="Button_Port1" Height="24" Width="89" HorizontalAlignment="Left" Margin="10,0,10,0" Command="{Binding Port1ConnectCommand}" Click="Button_Port1_Click"/>
+                <Button Grid.Row="0" Grid.Column="3" Content="CLOSE" Name="Button_ClosePort1" Height="24" Width="89" HorizontalAlignment="Left" Margin="10,0,10,0" Command="{Binding Port1DisConnectCommand}" Click="Button_ClosePort1_Click"/>
+
+                <Label Grid.Row="1" Grid.Column="0" Content="PORT 2 :" VerticalAlignment="Center" Height="30"/>
+                <ComboBox Grid.Row="1" Name="ComboBox_Port2" Grid.Column="1"  Height="30" ItemsSource="{Binding PortList2}" SelectedItem="{Binding SelectPort2}"/>
+                <Button Grid.Row="1" Grid.Column="2" Content="OPEN" Name="Button_Port2" Height="24" Width="89" HorizontalAlignment="Left" Margin="10,0,10,0"  Command="{Binding Port2ConnectCommand}" Click="Button_Port2_Click"/>
+                <Button Grid.Row="1" Grid.Column="3" Content="CLOSE" Name="Button_ClosePort2" Height="24" Width="89" HorizontalAlignment="Left" Margin="10,0,10,0" Command="{Binding Port2DisConnectCommand}" Click="Button_ClosePort2_Click"/>
+
+            </Grid>
+        </GroupBox>
+        <GroupBox Margin="10,153,10,117" BorderBrush="#FFB5B5B5" Header="Monitoring" FontSize="15" Foreground="#FFB5B5B5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*"/>
+                    <ColumnDefinition Width="23*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="제품ID :" VerticalAlignment="Center" Height="30" Width="80" HorizontalAlignment="Left" Margin="25,0,0,0" Grid.ColumnSpan="2"/>
+                <Label Grid.Row="1" Content="전압(mV) :" VerticalAlignment="Top" Height="30" Width="95" HorizontalAlignment="Right" Margin="0,10,343,0" Grid.ColumnSpan="2"/>
+                <Label Grid.Row="2" Content="전류(mA) :" VerticalAlignment="Center" Height="30" Width="95" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="10,0,0,0"/>
+                <Label Grid.Row="3" Content="풍속1(RPM) :" VerticalAlignment="Center" Height="30" Width="95" HorizontalAlignment="Left" FontSize="13" Grid.ColumnSpan="2" Margin="10,0,0,0"/>
+                <Label Grid.Row="4" Content="풍속2(m/s) :" VerticalAlignment="Center" Height="30" Width="95" FontSize="13" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="10,0,0,0"/>
+
+                <Label  Grid.Column="1" Content="{Binding Product_str}" VerticalAlignment="Center" Height="30" Name="Text_ProductID"/>
+                <Label  Grid.Row="1" Grid.Column="1" Content="{Binding Voltage_str}" VerticalAlignment="Center" Height="30" Name="Text_Voltage"/>
+                <Label  Grid.Row="2" Grid.Column="1" Content="{Binding Currect_str}" VerticalAlignment="Center" Height="30" Name="Text_Current"/>
+                <Label  Grid.Row="3" Grid.Column="1" Content="{Binding WindSeed1_str}" VerticalAlignment="Center" Height="30" Name="Text_WindSpeed1"/>
+                <Label  Grid.Row="4" Grid.Column="1" Content="{Binding WindSeed3_str}" VerticalAlignment="Center" Height="30" Name="Text_WindSpeed3"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Margin="10,447,10,0" BorderBrush="#FFB5B5B5" Header="Control" FontSize="15" Foreground="#FFB5B5B5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="9*"/>
+                    <ColumnDefinition Width="89*"/>
+                    <ColumnDefinition Width="0*"/>
+                    <ColumnDefinition Width="241*"/>
+                    <ColumnDefinition Width="110"/>
+                </Grid.ColumnDefinitions>
+                <Label  Content="풍속2 간격(분) :" VerticalAlignment="Center" Height="30" Width="98" FontSize="12" Grid.ColumnSpan="2" HorizontalAlignment="Right"/>
+                <TextBox VerticalAlignment="Center" Height="30" Name="Input_WindSpeed" Grid.Column="3" Text="{Binding Windspeed2_str, UpdateSourceTrigger=PropertyChanged}" />
+
+                <Label Grid.Row="1" Content="전송간격(분) :" VerticalAlignment="Center" Height="30" HorizontalAlignment="Left" Grid.ColumnSpan="4" Width="98" FontSize="12"/>
+                <TextBox Grid.Row="1" VerticalAlignment="Center" Height="30" Name="Input_Time" Grid.Column="3" Text="{Binding Time_str, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Grid.Column="4" Content="변경"  VerticalAlignment="Top" Name="Button_Time" Height="34" Margin="18,22,19,0" Command="{Binding Control2ChangeCommand}" Grid.RowSpan="2" FontSize="13"/>
+            </Grid>
+        </GroupBox>
+
+    </Grid>
+</Window>

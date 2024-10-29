@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Numeric_Conversion_wpf_ver/1.0.0": {
+        "runtime": {
+          "Numeric_Conversion_wpf_ver.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Numeric_Conversion_wpf_ver/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

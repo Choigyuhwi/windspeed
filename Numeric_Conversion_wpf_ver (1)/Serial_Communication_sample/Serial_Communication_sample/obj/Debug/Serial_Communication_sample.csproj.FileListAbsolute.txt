@@ -1,0 +1,10 @@
+C:\Users\admin\source\repos\Serial_Communication_sample\Serial_Communication_sample\bin\Debug\Serial_Communication_sample.exe
+C:\Users\admin\source\repos\Serial_Communication_sample\Serial_Communication_sample\bin\Debug\Serial_Communication_sample.exe.config
+C:\Users\admin\source\repos\Serial_Communication_sample\Serial_Communication_sample\bin\Debug\Serial_Communication_sample.pdb
+C:\Users\admin\source\repos\Serial_Communication_sample\Serial_Communication_sample\obj\Debug\Serial_Communication_sample.csproj.AssemblyReference.cache
+C:\Users\admin\source\repos\Serial_Communication_sample\Serial_Communication_sample\obj\Debug\Serial_Communication_sample.serial_communication_main.resources
+C:\Users\admin\source\repos\Serial_Communication_sample\Serial_Communication_sample\obj\Debug\Serial_Communication_sample.Properties.Resources.resources
+C:\Users\admin\source\repos\Serial_Communication_sample\Serial_Communication_sample\obj\Debug\Serial_Communication_sample.csproj.GenerateResource.cache
+C:\Users\admin\source\repos\Serial_Communication_sample\Serial_Communication_sample\obj\Debug\Serial_Communication_sample.csproj.CoreCompileInputs.cache
+C:\Users\admin\source\repos\Serial_Communication_sample\Serial_Communication_sample\obj\Debug\Serial_Communication_sample.exe
+C:\Users\admin\source\repos\Serial_Communication_sample\Serial_Communication_sample\obj\Debug\Serial_Communication_sample.pdb

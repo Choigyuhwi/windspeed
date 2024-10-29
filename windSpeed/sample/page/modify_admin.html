@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>대류 소형 풍력발전_고객 및 제품</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+        <link href="../css/styles.css" rel="stylesheet" />
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=297f2520333406e7f7a66668beead5da&libraries=services"></script>
+        <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        <script src="../js/scripts.js"></script>
+        <script src="../js/getCurrentLocation.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="../js/add_admin.js"></script>
+    </head>
+        
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="table_monitoring.html">대류 소형 풍력발전</a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="검색" aria-label="검색" aria-describedby="btnNavbarSearch" />
+                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
+            <!-- Navbar-->
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#!">Settings</a></li>
+                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link" href="table_monitoring.html">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                                실시간 모니터링
+                            </a>
+                            <div class="sb-sidenav-menu-heading">등록</div>
+                            <a class="nav-link" href="table_customer.html">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-building-user"></i></div>
+                                고객 및 제품
+                            </a>
+                            <a class="nav-link" href="table_productinfo.html">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-stopwatch"></i></div>
+                               제품 보증기간
+                            </a>
+                            <a class="nav-link" href="table_admin.html">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-user-tie"></i></i></div>
+                                관리자
+                            </a>
+                            <div class="sb-sidenav-menu-heading">등록</div>
+                            <a class="nav-link" href="table_datainfo.html">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-calendar-check"></i></i></div>
+                                데이터조회
+                            </a>
+                            <a class="nav-link" href="table_errordatainfo.html">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-calendar-xmark"></i></div>
+                                오류데이터 조회
+                            </a>
+                        </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-10">
+                                    <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                        <div class="card-header"><h3 class="text-center font-weight-light my-4">관리자 정보 수정</h3></div>
+                                        <div class="card-body">
+                                            <form>
+                                                	
+                                            <div class="form-group row align-items-center pb-1">
+                                                <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">관리자 등급</label>
+                                                <div class="col-lg-2 col-xl-2">
+                                                    <select class="form-control form-control-modern" name="level" value="" id="adminLevel">
+                                                        <option value="level1">슈퍼관리자</option>
+                                                        <option value="level2">관리자</option>
+                                                        <option value="level3">판매처</option>
+                                                    </select>
+                                                </div>
+
+                                                <label class="col-lg-1 col-xl-1 control-label text-lg-end mb-0">상위관리자</label>
+                                                <div class="col-lg-3 col-xl-3">
+                                                    <select class="form-control form-control-modern" name="upperId" value="" id="parentadmin">
+                                                       
+                                                    </select>
+                                                </div>
+                                                
+                                            </div>
+                                        
+                                        
+                                            <div class="form-group row align-items-center pb-1 pt-1">
+                                                <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">아이디</label>
+                                                <div class="col-lg-7 col-xl-6">
+                                                    <input type="text" class="form-control form-control-modern" name="id" value="" required="" id="id">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row align-items-center pb-1 pt-1">
+                                                <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">비밀번호</label>
+                                                <div class="col-lg-7 col-xl-6">
+                                                    <input type="password" class="form-control form-control-modern" name="pass" value="" required="" id="password">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row align-items-center pb-1 pt-1">
+                                                <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">비밀번호 확인</label>
+                                                <div class="col-lg-7 col-xl-6">
+                                                    <input type="password" class="form-control form-control-modern" name="pass2" value="" id="passwordcheck">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row align-items-center pb-1 pt-1">
+                                                <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">회사명</label>
+                                                <div class="col-lg-7 col-xl-6">
+                                                    <input type="text" class="form-control form-control-modern" name="company" value="" required="" id="conpanyname">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row align-items-center pb-1 pt-1">
+                                                <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">대표자</label>
+                                                <div class="col-lg-7 col-xl-6">
+                                                    <input type="text" class="form-control form-control-modern" name="name" value="" required="" id="ceo">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row align-items-center pb-1 pt-1">
+                                                <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">주소</label>
+                                                <div class="col-lg-7 col-xl-6">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control form-control-modern" name="address" value="" placeholder="주소를 검색해 주세요." disabled="true" id="address">
+                                                        <button class="btn btn-success" type="button" onclick="searchPostcode()">주소검색</button>
+                                                    </div>
+                                                    <div class="input-group" style="margin: 5px 0 0 0">
+                                                        <div class="col-sm-2">
+                                                            <input type="text" class="form-control form-control-modern" name="zonecode" value="" placeholder="우편번호" disabled="true" id = "postcode">
+                                                        </div>
+                                                        <div class="col-sm-10" style="padding: 0 0 0 5px;">
+                                                            <input type="text" class="form-control form-control-modern" name="address2" value="" placeholder="나머지 주소를 입력해 주세요." id="address2">
+                                                        </div>
+                                                    </div>
+                                                    <div class="input-group" style="margin: 5px 0 0 0">
+                                                        <input type="text" class="form-control form-control-modern" name="longitude" value="" placeholder="경도" disabled="true" id = "longitude">
+                                                        <input type="text" class="form-control form-control-modern" name="latitude" value="" placeholder="위도" style="margin: 0 0 0 5px;" disabled="true" id = "latitude">
+                                                    </div>
+
+                                                    <div id="map" style="height: 300px; margin: 5px 0px 0px; position: relative; overflow: hidden;">
+                                                    </div>  
+                                            </div>
+                                            <div class="form-group row align-items-center pb-1 pt-1">
+                                                <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">전화번호</label>
+                                                <div class="col-lg-7 col-xl-6">
+                                                    <input type="text" class="form-control form-control-modern" name="phone" value=""  maxlength="11" required="" placeholder="숫자만 입력해주세요." id="tellnum">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row align-items-center pb-1 pt-1">
+                                                <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">이메일</label>
+                                                <div class="col-lg-7 col-xl-6">
+                                                    <input type="text" class="form-control form-control-modern" name="email" value="" id="email">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row align-items-center pb-3 pt-3">
+                                                <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">알람수신</label>
+                                                <div class="col-lg-7 col-xl-6">
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" name="alarmYn" value="" id="alrmcheck"> 수신하기
+                                                </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row align-items-center pb-1 pt-1">
+                                                        <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">알람수신 시간설정</label>
+                                                        <div class="col-lg-2 col-xl-2">
+                                                            <select class="form-control form-control-modern" name="alarmStartHour" value="" id="alrmstarttime">
+                                                                <option>0시</option>
+                                                                <option>1시</option>
+                                                                <option>2시</option>
+                                                                <option>3시</option>
+                                                                <option>4시</option>
+                                                                <option>5시</option>
+                                                                <option>6시</option>
+                                                                <option>7시</option>
+                                                                <option>8시</option>
+                                                                <option>9시</option>
+                                                                <option>10시</option>
+                                                                <option>11시</option>
+                                                                <option>12시</option>
+                                                                <option>13시</option>
+                                                                <option>14시</option>
+                                                                <option>15시</option>
+                                                                <option>16시</option>
+                                                                <option>17시</option>
+                                                                <option>18시</option>
+                                                                <option>19시</option>
+                                                                <option>20시</option>
+                                                                <option>21시</option>
+                                                                <option>22시</option>
+                                                                <option>23시</option>
+                                                            </select>
+                                                        </div>
+                                                        
+                                                        <div style="width: 20px;">
+                                                            <span class=""> ~ </span>
+                                                        </div>
+                                                        
+                                                        <div class="col-lg-2 col-xl-2">
+                                                            <select class="form-control form-control-modern" name="alarmEndHour" value="" id="alrmendtime">
+                                                                <option>1시</option>
+                                                                <option>2시</option>
+                                                                <option>3시</option>
+                                                                <option>4시</option>
+                                                                <option>5시</option>
+                                                                <option>6시</option>
+                                                                <option>7시</option>
+                                                                <option>8시</option>
+                                                                <option>9시</option>
+                                                                <option>10시</option>
+                                                                <option>11시</option>
+                                                                <option>12시</option>
+                                                                <option>13시</option>
+                                                                <option>14시</option>
+                                                                <option>15시</option>
+                                                                <option>16시</option>
+                                                                <option>17시</option>
+                                                                <option>18시</option>
+                                                                <option>19시</option>
+                                                                <option>20시</option>
+                                                                <option>21시</option>
+                                                                <option>22시</option>
+                                                                <option>23시</option>
+                                                                <option>24시</option>
+                                                            </select>
+                                                        </div>
+                                                        
+                                                        <div class="col-lg-2 col-xl-2">
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" name="alarmHoliday" value="" id="alrmholidaycheck"> 휴일 알람 받기
+                                                            </label>
+                                                        </div>
+                                            </div>
+                                                    
+                                            <div class="form-group row align-items-center pb-1 pt-1">
+                                                <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">메모</label>
+                                                <div class="col-lg-7 col-xl-6">
+                                                <textarea rows="3" class="form-control" name="memo" id="etc"></textarea>
+                                                </div>
+                                            </div>
+                                          
+                                            </form>
+                                            
+                                        </div>
+                                        <div class="row action-buttons" style="padding: 100px 10px 10px 10px">
+                                            <div class="col-12 col-md-auto ms-md-auto mt-3 mt-md-0 ms-auto">
+                                                <button onclick="modify_save()" class="btn btn-primary py-3 d-flex align-items-center ">
+                                                    <i class="me-2 fa-regular fa-floppy-disk"></i> 저장
+                                                </button>
+                                            </div>
+                                            <div class="col-12 col-md-auto" style="margin: 0px; padding: 0px 10px 0px 0px;">
+                                                <a href="table_admin.html" class="cancel-button btn btn-light btn-px-4 py-3 border font-weight-semibold text-color-dark text-3">취소</a>
+                                            </div>
+                                                
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </main>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="../js/scripts.js"></script>
+        <script src="../js/datatables-simple-demo.js"></script>
+        <script src="../js/admin.js"></script>
+        <script src="../js/DataSC.js"></script>
+        <script>
+            window.onload = function() {
+                modityAdminDataLoad();
+             };
+         </script>
+            
+    </body>
+</html>

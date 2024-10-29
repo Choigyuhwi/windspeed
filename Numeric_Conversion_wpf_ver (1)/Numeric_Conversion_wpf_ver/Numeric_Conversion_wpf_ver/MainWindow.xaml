@@ -1,0 +1,58 @@
+﻿<Window x:Class="Numeric_Conversion_wpf_ver.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Numeric_Conversion_wpf_ver"
+        mc:Ignorable="d"
+        Title="Numberic_Conversion_wpf" Height="550" Width="450">
+    <StackPanel Margin="10">
+        <TextBox Margin="5" Width="400" Height="100" Name="txtResult" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+                 TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" IsReadOnly="True">0
+        </TextBox>
+        <ComboBox Margin="15,5,5,5" Width="100" Name="Combobox_select" HorizontalAlignment="Left" SelectionChanged="Combobox_select_changed">
+            <ComboBoxItem>HEX</ComboBoxItem>
+            <ComboBoxItem>DEC</ComboBoxItem>
+            <ComboBoxItem>OCT</ComboBoxItem>
+            <ComboBoxItem>BIN</ComboBoxItem>
+        </ComboBox>
+        <Grid Height="300" Margin="10">
+            <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="0" Margin="5" FontSize="16" Click="btn_Click" Name="btn_0">0</Button>
+            <Button Grid.Row="0" Grid.Column="1" Margin="5" FontSize="16" Click="btn_Click" Name="btn_1">1</Button>
+            <Button Grid.Row="0" Grid.Column="2" Margin="5" FontSize="16" Click="btn_Click" Name="btn_2">2</Button>
+            <Button Grid.Row="0" Grid.Column="3" Margin="5" FontSize="16" Click="btn_Click" Name="btn_3">3</Button>
+
+            <Button Grid.Row="1" Grid.Column="0" Margin="5" FontSize="16" Click="btn_Click" Name="btn_4">4</Button>
+            <Button Grid.Row="1" Grid.Column="1" Margin="5" FontSize="16" Click="btn_Click" Name="btn_5">5</Button>
+            <Button Grid.Row="1" Grid.Column="2" Margin="5" FontSize="16" Click="btn_Click" Name="btn_6">6</Button>
+            <Button Grid.Row="1" Grid.Column="3" Margin="5" FontSize="16" Click="btn_Click" Name="btn_7">7</Button>
+
+            <Button Grid.Row="2" Grid.Column="0" Margin="5" FontSize="16" Click="btn_Click" Name="btn_8">8</Button>
+            <Button Grid.Row="2" Grid.Column="1" Margin="5" FontSize="16" Click="btn_Click" Name="btn_9">9</Button>
+            <Button Grid.Row="2" Grid.Column="2" Margin="5" FontSize="16" Click="btn_Click" Name="btn_a">a</Button>
+            <Button Grid.Row="2" Grid.Column="3" Margin="5" FontSize="16" Click="btn_Click" Name="btn_b">b</Button>
+
+            <Button Grid.Row="3" Grid.Column="0" Margin="5" FontSize="16" Click="btn_Click" Name="btn_c">c</Button>
+            <Button Grid.Row="3" Grid.Column="1" Margin="5" FontSize="16" Click="btn_Click" Name="btn_d">d</Button>
+            <Button Grid.Row="3" Grid.Column="2" Margin="5" FontSize="16" Click="btn_Click" Name="btn_e">e</Button>
+            <Button Grid.Row="3" Grid.Column="3" Margin="5" FontSize="16" Click="btn_Click" Name="btn_f">f</Button>
+
+            <Button Grid.Row="4" Grid.Column="3" Margin="5" FontSize="16" Click="btn_Click" Name="btn_delete">삭제</Button>
+        </Grid>
+    </StackPanel>
+
+</Window>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>대류 소형 풍력발전_고객 및 제품</title>
+        <!-- <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" /> -->
+        <link href="../css/styles.css" rel="stylesheet" />
+        <!-- <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script> -->
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=297f2520333406e7f7a66668beead5da&libraries=services"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet"> -->
+        <style>
+            table {
+                border-collapse: collapse;
+                width: auto;
+            }
+            th, td {
+                border: 1px solid #dddddd;
+                text-align: center;
+                font-size: 15px;
+                padding: 8px;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+            /* 지도 컨테이너의 크기 설정 */
+            #map {
+                height: 800px; /* 지도의 높이 설정 */
+                width: 100%; /* 지도의 너비 설정 */
+            }
+            #markerTextbox {
+                position: absolute;
+                background-color: rgba(255, 255, 255, 0.897);
+                border: 1px solid #ccc;
+                width: 14%;
+                height: 19%;
+                border-radius: 5px;
+                display: block;
+                z-index: 1; /* 텍스트 상자가 마커 위에 오도록 설정 */
+                }
+            .Textboxlabel{
+                display: block;
+                margin-left: 10px;
+                margin-top: 10px;
+                font-size: 100%;
+            }
+            .TextboxMainlabel{
+                display: block;
+                margin-left: 10px;
+                margin-top: 10px;
+                font-size: 120%;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="table_monitoring.html">대류 소형 풍력발전</a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="검색" aria-label="검색" aria-describedby="btnNavbarSearch" />
+                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
+            <!-- Navbar-->
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#!">Settings</a></li>
+                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link" href="table_monitoring.html">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                                실시간 모니터링
+                            </a>
+                            <div class="sb-sidenav-menu-heading">등록</div>
+                            <a class="nav-link" href="table_customer.html">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-building-user"></i></div>
+                                고객 및 제품
+                            </a>
+                            <!-- <a class="nav-link" href="table_productinfo.html">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-stopwatch"></i></div>
+                               제품 보증기간
+                            </a> -->
+                            <a class="nav-link" href="table_admin.html">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-user-tie"></i></i></div>
+                                관리자
+                            </a>
+                            <div class="sb-sidenav-menu-heading">조회</div>
+                            <a class="nav-link" href="table_datainfo.html">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-calendar-check"></i></i></div>
+                                데이터조회
+                            </a>
+                            <!-- <a class="nav-link" href="table_errordatainfo.html">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-calendar-xmark"></i></div>
+                                오류데이터 조회
+                            </a> -->
+                        </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">실시간 모니터링</h1>
+                        <div id="receivedData"></div>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item">실시간 모니터링</li>
+                        </ol>
+                         <div class="searchparent m-2">
+                            <div class="front-container">
+                                <div class ="super-container">
+                                    <div class="table_admin">슈퍼관리자</div>
+                                    <div class="custom-select select">
+                                        <select id="admincombobox_super">
+                                    
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class ="admin-container">
+                                    <div class="table_name">관리자</div>
+                                    <div class="custom-select select">
+                                        <select id="admincombobox_admin">
+                                            <option value="option1">전체</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class ="customer-container">
+                                    <div class="table_name">판매처</div>
+                                    <div class="custom-select select">
+                                        <select id="customercombobox_admin">
+                                            <option value="option1">전체</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class ="search-container2">
+                                <div class="custom-searchmax select">
+                                    <select id="admincombobox_maxview">
+                                        <option value="10">10개</option>
+                                        <option value="20">20개</option>
+                                        <option value="50">50개</option>
+                                        <option value="100">100개</option>
+                                    </select>
+                                </div>
+                                <div class="search_box">
+                                    <div class="input-wrapper">
+                                        <input class="text-search" type="text" placeholder="검색">
+                                    </div>
+                                    <button class="btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="map"></div>
+
+                        <div id="markerTextbox">
+                            <label class = "TextboxMainlabel" id ="label1">시리얼넘버</label>
+                            <label class = "Textboxlabel" id = "label2">수신시간: </label>
+                            <label class = "Textboxlabel" id = "label3">전압: </label>
+                            <label class = "Textboxlabel" id = "label4">전류: </label>
+                            <label class = "Textboxlabel" id = "label5">풍속1: </label>
+                            <label class = "Textboxlabel" id = "label6">풍속2: </label>
+                        </div>
+
+                    </div>
+                    
+                    <div id="dataModal" class="dataModal">
+                        <div class="dataModal-content modal-dialog-scrollable">
+                            <div class="loadingview" id="loadingview">
+                                <div class="loading-wrap loading-wrap--js" style="display: none">
+                                  <div class="loading-spinner loading-spinner--js"></div>
+                                  <p id="loadingMessage" class="loadingMessage"></p>
+                                </div>
+                            </div>
+                            <span class="close" onclick="closedataModal()">&times;</span>
+                            <h2 id="dataModal-header" class="datamodalHeader mb-4">Hello, Modal!</h2>
+                            <div class="modal-body">
+                                <div class="modalpagecontainer">
+                                    <div class="optionParent">
+                                        <div class="toggleParent mb-2">
+                                            <div class="form-check data-checkbox">
+                                                <input class="form-check-input" type="radio" name="toggle" value="toggle3" id="toggle3" checked>
+                                                <label class="form-check-label" for="toggle3">
+                                                전체
+                                                </label>
+                                            </div>
+                                            <div class="form-check data-checkbox">
+                                                <input class="form-check-input" type="radio" name="toggle" value="toggle1" id="toggle1" >
+                                                <label class="form-check-label" for="toggle1">
+                                                스프레드시트
+                                                </label>
+                                            </div>
+                                            <!-- 두 번째 토글 -->
+                                            <div class="form-check data-checkbox">
+                                                <input class="form-check-input" type="radio" name="toggle" value="toggle2" id="toggle2">
+                                                <label class="form-check-label" for="toggle2">
+                                                그래프
+                                                </label>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="dateParent">
+                                            <div class="dataContainer">
+                                                <label for="startDate" class="form-label">시작일:</label>
+                                                <input type="text" class="datepicker" id="startDate" readonly>
+                                            </div>
+                                            <div class="">
+                                                <label for="startDate" class="form-label">~</label>
+                                            </div>
+                                            <!-- 종료일 선택 -->
+                                            <div class="dataContainer">
+                                                <label for="endDate" class="form-label">종료일:</label>
+                                                <input type="text" class="datepicker" id="endDate" readonly>
+                                            </div>
+                                            <div class="databtn">
+                                            <button type="button" class="btn btn-primary" onclick="ClickReportBtn()">조회</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="container mb-4">
+                                        <canvas id="myChart_V" width="400" height="60"></canvas>
+                                        <canvas id="myChart_A" width="400" height="60"></canvas>
+                                        <canvas id="myChart_Wind1" width="400" height="60"></canvas>
+                                        <canvas id="myChart_Wind2" width="400" height="60"></canvas>
+                                    </div>
+                                    <div class="datainfotalble">
+                                        <table id="receiveddataTable" >
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 350px">데이터수신 시간</th>
+                                                    <th style="width: 250px">전압(mV)</th>
+                                                    <th style="width: 250px">전류(mA)</th>
+                                                    <th style="width: 250px">풍속1(RPM)</th>
+                                                    <th style="width: 250px">풍속2(RPM)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                
+                                                <!-- 여기에 더 많은 데이터 행을 추가할 수 있습니다. -->
+                                            </tbody>
+                                        </table>  
+                                    </div>
+                                </div>
+                                <div class="modalpagecontainer2 mt-lg-5">
+                                    <div id="modalpagination"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </main>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="../js/scripts.js"></script>
+        <script src="../js/datatables-simple-demo.js"></script>
+        <script src="../js/DataSC.js"></script>
+        <script src="../js/getCurrentLocation.js"></script>
+        <script src="../js/monitoring.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                       
+        <script>
+        // Datepicker 초기화
+     
+
+        // 오늘 날짜 가져오기
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); // 1월은 0부터 시작
+        var yyyy = today.getFullYear();
+        today = yyyy + '-' + mm + '-' + dd;
+
+        // 종료일에 오늘 날짜 설정
+        $('#endDate').val(today);
+
+        // 6달 전 날짜 계산
+        var MonthsAgo = new Date();
+        // MonthsAgo.setMonth(MonthsAgo.getMonth() - 1);   // cjy = modify 20240826
+        // MonthsAgo.setDate(MonthsAgo.getDate() - 20);   // cjy = modify 20240826
+        var start_dd = String(MonthsAgo.getDate()).padStart(2, '0');
+        var start_mm = String(MonthsAgo.getMonth() + 1).padStart(2, '0');
+        var start_yyyy = MonthsAgo.getFullYear();
+        var MonthsAgo = start_yyyy + '-' + start_mm + '-' + start_dd;
+
+        // 시작일에 6달 전 날짜 설정
+        $('#startDate').val(MonthsAgo);
+
+        $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd', // 날짜 형식 지정
+            autoclose: true, // 선택 후 자동으로 닫힘
+            language: 'ko', // 한국어 설정
+        });
+        </script>
+        <script>
+            // 스크립트 파일에서 노출된 함수를 호출하여 지도 초기화
+            window.onload = function() {
+                var chart1 = document.getElementById('myChart_V');
+                var chart2 = document.getElementById('myChart_A');
+                var chart3 = document.getElementById('myChart_Wind1');
+                var chart4 = document.getElementById('myChart_Wind2');
+                var table = document.getElementById('receiveddataTable');
+                chart1.style.display = 'block';
+                chart2.style.display = 'block';
+                chart3.style.display = 'block';
+                chart4.style.display = 'block';
+                table.style.display = 'block';
+                toggle_set();
+                loadTextFile_monitoring();
+                table_customer_combobox();
+                var str = "WHERE ADMINLEVEL='level1'";
+                getmonitoringconditiondata2(str,0);
+               
+            };
+        </script>
+        <script>
+            // 5초마다 페이지를 재로드하는 함수
+            setInterval(function() {
+                location.reload(); // 페이지 재로드
+            }, 300000); // 5분마다 재로드
+        </script>
+         <script>
+            window.onclick = function(event) {
+                var modal = document.getElementById('dataModal');
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                    removeChart();
+                }
+            }
+        </script>
+        
+    </body>
+</html>
